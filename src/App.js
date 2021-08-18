@@ -28,9 +28,10 @@ class App extends React.Component {
     e.preventDefault();
 
     await this.setState({
+     
       DiscovedCity: e.target.city.value,
     });
-
+//////////////////////////////////////////////////////////////////////
     // console.log('aaaaaa',this.state.DiscovedCity);
     console.log("aaaaaa", this.state.FindMap);
 
@@ -72,7 +73,7 @@ class App extends React.Component {
       WheatherData: WheatherResult.data,
     });
   };
-  ////////////////// when I type the city  this function fire //////// (getlocationCity)
+  ////////////////// when I type the city  this function fire //////// (getlocationCity) 
 
   render() {
     return (
@@ -92,8 +93,9 @@ class App extends React.Component {
           <img
             src={`https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATIONANDMAPIQ_KEY}&&center= 
     ${this.state.CityData.lat},${this.state.CityData.lon} &size=300x300&zoom=14`}
-               alt='image map'             />
-        )}
+               alt='image map' />
+         )
+        }
 
         <Wheater
           show={this.state.show}
@@ -105,3 +107,4 @@ class App extends React.Component {
 }
 
 export default App;
+
