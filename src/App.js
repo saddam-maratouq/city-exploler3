@@ -3,6 +3,7 @@ import React from "react";
 import axios from "axios";
 
 import Wheater from "./component/Wheater";
+import Livewheater from "./component/Livewheater";
 
 class App extends React.Component {
  
@@ -20,6 +21,8 @@ class App extends React.Component {
       show: false,
 
       WheatherData: [],
+
+      WheatherInfoLive : [],
     };
   }
   //////////////////////////////////////////////////////////////
@@ -31,7 +34,7 @@ class App extends React.Component {
      
       DiscovedCity: e.target.city.value,
     });
-//////////////////////////////////////////////////////////////////////
+
     // console.log('aaaaaa',this.state.DiscovedCity);
     console.log("aaaaaa", this.state.FindMap);
 
@@ -63,6 +66,21 @@ class App extends React.Component {
 
     //////////////////////////////////////////////////////////////////
 
+
+    let  wheaterLiveUrl = `${process.env.REACT_APP_SERVER_LINK}/daily?&key=${process.env.REACT_APP_WHEATHER_KEY}&city=${this.state.DiscovedCity}&days=5`	
+
+
+    let wheaterLiveUrlInfo = await axios.get(wheaterLiveUrl); 
+
+    console.log('ssssss',wheaterLiveUrlInfo.data);
+
+
+
+
+
+
+    ///////////////////////////////////////////////////////////////////
+
     this.setState({
       CityData: result.data[0],
 
@@ -71,9 +89,11 @@ class App extends React.Component {
       show: true,
 
       WheatherData: WheatherResult.data,
+
+      WheatherInfoLive: wheaterLiveUrlInfo.data
     });
   };
-  ////////////////// when I type the city  this function fire //////// (getlocationCity) 
+  ////////////////// when I type the city  this function fire //////// (getlocationCity) /////__________
 
   render() {
     return (
@@ -101,10 +121,19 @@ class App extends React.Component {
           show={this.state.show}
           Wheatherinfo={this.state.WheatherData}
         />
+
+         <br />
+         <br />
+
+
+        < Livewheater
+        
+        show={this.state.show}
+        WheatherinfoLife={this.state.WheatherInfoLive}
+        />
       </div>
     );
   }
 }
 
-export default App;
-
+export default App;  
